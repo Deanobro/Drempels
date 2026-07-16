@@ -9,13 +9,13 @@ jobs:
       uses: actions/checkout@v4
     - name: Load Microsoft Build Tools
       uses: microsoft/setup-msbuild@v2
-    - name: Update Solution Configuration
+    - name: Compile Solution to Release
       run: |
-        msbuild Drempels.sln /p:Configuration=Release /p:Platform=x64 /p:WindowsTargetPlatformVersion=10.0
+        msbuild Drempels/Drempels.vcxproj /p:Configuration=Release /p:Platform=x64
     - name: Package Executable for Download
       uses: actions/upload-artifact@v4
       with:
         name: Drempels-Windows-x64
         path: |
-          **/Release/Drempels.exe
+          **/Release/*.exe
           **/Release/*.dll
